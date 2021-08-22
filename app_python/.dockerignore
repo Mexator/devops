@@ -1,0 +1,7 @@
+.venv/*
+.vscode/*
+src/test
+Dockerfile
+**/__pycache__
+*.md
+.env

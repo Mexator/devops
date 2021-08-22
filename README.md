@@ -24,6 +24,17 @@ pip install -r requirements.txt
 python -m flask run
 ```
 
+Then you can open [http://localhost:5000] in your browser.
+
+### Running with Docker
+
+There is a [Docker image](https://hub.docker.com/repository/docker/mexator/clock)
+built with app. To run it you need Docker. Simply launch
+
+```sh
+docker run --publish 5000:5000 mexator/clock
+```
+
 ## Running tests
 
 Clone this repository, enter `app_python` and execute following commands to
