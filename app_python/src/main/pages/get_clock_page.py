@@ -2,27 +2,28 @@
 from datetime import datetime
 import pytz
 
-import config
-import pages.get_head as get_head
-import pages
+from src.main.pages import env
+from src.main.config import clock_zone
+from src.main.pages.get_head import get_head
 
-_clock_zone = pytz.timezone(config.clock_zone)
+_clock_zone = pytz.timezone(clock_zone)
 _FORMAT = '''
 %A, %d %B %Y
 %H:%M:%S
 '''
 
-def get_time_str(get_utc_time = datetime.utcnow):
+
+def get_time_str(timezone=_clock_zone, get_utc_time=datetime.utcnow):
     """Return current date and time string, zoned with timezone from config"""
     # datetime is zoned as UTC
     time = pytz.utc.localize(get_utc_time())
     # change TZ to required one
-    localized = time.astimezone(_clock_zone)
+    localized = time.astimezone(timezone)
     return localized.strftime(_FORMAT)
 
 
 def get_page():
     """Return page with clock"""
-    template = pages.env.get_template("clock.html")
-    rendered = template.render(time = get_time_str())
-    return get_head.get_head() + rendered
+    template = env.get_template("clock.html")
+    rendered = template.render(time=get_time_str())
+    return get_head() + rendered

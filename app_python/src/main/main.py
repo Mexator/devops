@@ -1,7 +1,7 @@
 from flask import Flask
 
-import config
-import routes
+from src.main import config
+from src.main import routes
 
 app = Flask(config.app_name)
 routes.init_routes(app)
