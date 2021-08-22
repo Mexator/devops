@@ -19,13 +19,13 @@ explains how to fix the issue)
 ## Practices that I found. Checked ones are that I used
 
 * [x] Use a VCS
-* [ ] Pick a license and make sure it is present in repository
-* [ ] Use requirements.txt (in case of Python) or any other way of dependency management
-* [ ] Document code
-* [ ] Test code
-* [ ] Follow style guidelines (e.g. PEP-8)
+* [x] Pick a license and make sure it is present in repository
+* [x] Use requirements.txt (in case of Python) or any other way of dependency management
+* [x] Document code
+* [x] Test code
+* [x] Follow style guidelines (e.g. PEP-8)
 * [ ] Use a PyPi instead of writing code - I found this, but I think it is AT
 LEAST controversial. Didn't used it
-* [ ] Use virtual environments to avoid dependency clashes
-* [ ] Use a linter. Force its use when pushing code to `dev` or `master`.
-* [ ] Make the app configurable and store configuration in files
+* [x] Use virtual environments to avoid dependency clashes
+* [x] Use a linter. Force its use when pushing code to `dev` or `master`.
+* [x] Make the app configurable and store configuration in files
