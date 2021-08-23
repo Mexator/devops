@@ -1,7 +1,12 @@
 .venv/*
 .vscode/*
-src/test
+src/*
 Dockerfile
 **/__pycache__
 *.md
 .env
+
+*
+!src/main/*
+!config.ini
+!requirements.txt
