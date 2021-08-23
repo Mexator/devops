@@ -29,3 +29,15 @@ LEAST controversial. Didn't used it
 * [x] Use virtual environments to avoid dependency clashes
 * [x] Use a linter. Force its use when pushing code to `dev` or `master`.
 * [x] Make the app configurable and store configuration in files
+
+## Unit tests
+
+My app is very simple. It relies on internal implementation of `datetime.utcnow`.
+Then the only thing to test in it is time string forming function. That is what
+my only test is doing.
+
+Best practices:
+
+* [x] It seems like using pytest is a best practice now
+* [x] Use fixtures
+* [x] Don’t modify fixture values in other fixtures

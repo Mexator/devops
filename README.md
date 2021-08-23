@@ -35,10 +35,15 @@ built with app. To run it you need Docker. Simply launch
 docker run --publish 5000:5000 mexator/clock
 ```
 
-## Running tests
+## Unit tests
 
-Clone this repository, enter `app_python` and execute following commands to
+Clone this repository, enter `app_python` and execute following command to
 run tests
+
+```sh
+pip install -r requirement.test.txt
+pytest src/test
+```
 
 ```sh
 python -m src.test.test

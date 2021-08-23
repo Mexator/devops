@@ -7,14 +7,12 @@ from src.main.config import clock_zone
 from src.main.pages.get_head import get_head
 
 _clock_zone = pytz.timezone(clock_zone)
-_FORMAT = '''
-%A, %d %B %Y
-%H:%M:%S
-'''
+_FORMAT = '''%A, %d %B %Y\n%H:%M:%S'''
 
 
-def get_time_str(timezone=_clock_zone, get_utc_time=datetime.utcnow):
+def get_time_str(timezone=_clock_zone):
     """Return current date and time string, zoned with timezone from config"""
+    get_utc_time=datetime.utcnow
     # datetime is zoned as UTC
     time = pytz.utc.localize(get_utc_time())
     # change TZ to required one
