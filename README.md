@@ -1,5 +1,7 @@
 # Clock
 
+[![Build and push Docker image](https://github.com/Mexator/devops/actions/workflows/build-image.yml/badge.svg)](https://github.com/Mexator/devops/actions/workflows/build-image.yml)
+
 A simple Python ap that shows current time in Moscow
 
 ## Description
