@@ -15,7 +15,7 @@ jobs:
     steps: 
       - name: Clone repository
         uses: actions/checkout@v2
-      - uses: Mexator/devops@v1
+      - uses: Mexator/devops/actions/run-tests@v1
         with:
           python-version: '3.9.6'
 
