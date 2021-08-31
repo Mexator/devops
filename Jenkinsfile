@@ -30,3 +30,6 @@ pipeline {
         }
     }
 }
+
+// For proof that I have managed to make Jenkins work see `assets/job-22.pdf`
+// (part of it in Russian, idk how to change language in Jenkins)
