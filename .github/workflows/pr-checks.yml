@@ -9,17 +9,6 @@ jobs:
     steps: 
       - name: Clone repository
         uses: actions/checkout@v2
-
-      - name: Setup python
-        uses: actions/setup-python@v2
+      - uses: Mexator/devops@v1
         with:
           python-version: '3.9.6'
-          architecture: 'x64'
-
-      - name: Run tests
-        run: | 
-          cd app_python
-          pip3 install -r requirements.txt
-          pip3 install -r requirements.test.txt
-          pytest src/test
-

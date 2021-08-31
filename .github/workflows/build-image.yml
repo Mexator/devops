@@ -5,10 +5,22 @@ on:
     branches: 
     - master
     - dev
-    tags: v*
+    tags: 
+    - v*
+    - lab*
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Clone repository
+        uses: actions/checkout@v2
+      - uses: Mexator/devops@v1
+        with:
+          python-version: '3.9.6'
+
   build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
