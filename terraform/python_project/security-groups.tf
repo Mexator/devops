@@ -1,3 +1,7 @@
+resource "aws_key_pair" "deployer" {
+  key_name   = "deployer-key"
+  public_key = file(var.deploy_pubkey_path)
+}
 resource "aws_security_group" "clock_server_sg" {
   name        = "clock_server_sg"
   description = "Security group for clock server"

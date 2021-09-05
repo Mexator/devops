@@ -21,12 +21,7 @@ resource "aws_instance" "clock" {
   vpc_security_group_ids      = [aws_security_group.clock_server_sg.id]
   subnet_id                   = aws_subnet.deploy.id
   associate_public_ip_address = true
-
-  user_data = <<-EOF
-        #!/bin/bash
-        curl -fsSL https://get.docker.com | /bin/sh
-        sudo docker run -p 80:5000 mexator/clock
-        EOF
+  key_name = "deployer-key"
 
   tags = {
     Name = "Clock server"
