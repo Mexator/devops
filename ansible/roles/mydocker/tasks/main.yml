@@ -26,3 +26,6 @@
     groups: docker
     append: true
   become: yes
+
+- include_tasks: install-compose.yml
+  when: docker_compose_install | bool 
