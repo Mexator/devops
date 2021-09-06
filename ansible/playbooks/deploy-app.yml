@@ -1,0 +1,9 @@
+---
+- hosts: all
+  remote_user: ubuntu
+
+  roles: 
+    - role: mydocker
+      become: yes
+    - role: clock-deploy
+      become: yes

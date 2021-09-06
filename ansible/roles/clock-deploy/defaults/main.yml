@@ -1,0 +1,4 @@
+---
+
+project_root: "/opt/clock/"
+desired_state: present

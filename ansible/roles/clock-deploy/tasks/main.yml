@@ -1,0 +1,11 @@
+---
+- name: 'Copy compose file'
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/assets/docker-compose.yml"
+    dest: "{{ project_root }}"
+    mode: 0644
+
+- name: 'docker-compose up'
+  community.docker.docker_compose:
+    project_src: "{{ project_root }}"
+    state: "{{ desired_state }}"
