@@ -1,0 +1,56 @@
+version: "3.9"
+services:
+  
+  # The app itself 
+  clock:
+    image: mexator/clock
+    ports: 
+      - "80:5000"
+    logging:
+      driver: "json-file"
+      options:
+        tag:
+          "{{.ImageName}}|{{.Name}}"
+    networks:
+      - monitoring.network
+
+  
+  # Log gathering agent
+  promtail:
+    image: grafana/promtail:${LOKI_VERSION}
+    command: -config.file=/etc/promtail/config.yml
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers
+      - ./promtail/config.yml:/etc/promtail/config.yml
+    expose: 
+      - 9080
+    ports: 
+      - "9080:9080"
+    networks:
+      - monitoring.network
+
+  # Log indexer
+  loki:
+    image: grafana/loki:${LOKI_VERSION}
+    command: -config.file=/etc/loki/local-config.yaml
+    expose:
+      - 3100
+    ports: 
+      - "3100:3100"
+    networks:
+      - monitoring.network
+
+  # Visualiser dashboard
+  grafana:
+    image: grafana/grafana:latest
+    expose: 
+      - 3000
+    ports: 
+      - "3000:3000"
+    networks:
+      - monitoring.network
+
+networks:
+  monitoring.network:
+    ipam:
+      driver: default
