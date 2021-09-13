@@ -39,6 +39,18 @@ services:
       - "3100:3100"
     networks:
       - monitoring.network
+  
+  # Metrics collector
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    command:
+      - "--config.file=/etc/prometheus/config.yml"
+    volumes:
+      - ./prometheus/config.yml:/etc/prometheus/config.yml
+    networks:
+      - monitoring.network
 
   # Visualiser dashboard
   grafana:

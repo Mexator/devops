@@ -9,6 +9,9 @@ have some tooling for logs.
 1. Add Context to Your Log Messages
 1. Perform log rotation: compress & remove logs. Also backup logs
 
-## Grafana screenshot
+## Grafana screenshots
 
 ![Screenshot of logging dashboard](../assets/PoW-lab7.png)
+![Screenshot of logging dashboard](../assets/PoW-lab8-pt.png)
+![Screenshot of logging dashboard](../assets/PoW-lab8-pd.png)
+![Screenshot of logging dashboard](../assets/PoW-lab8-ld.png)
