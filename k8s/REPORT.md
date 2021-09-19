@@ -12,3 +12,8 @@ Output of `kubectl get pods,svc` command:
 ![kubectl get pods,svc](../assets/lab9-pow1.png)
 Output of `kubectl get pods,svc` command after migrating to deployment files:
 ![kubectl get pods,svc](../assets/lab9-pow2.png)
+
+## Helm
+
+![Dashboard](../assets/lab10-pow.png)
+![kubectl get pods,svc](../assets/lab10-pow2.png)
