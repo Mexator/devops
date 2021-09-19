@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clock-deployment
+  labels:
+    app: clock
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: clock
+  template:
+    metadata:
+      labels: 
+        app: clock
+    spec:
+      containers:
+      - image: mexator/clock
+        name: clock
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 5000
+        resources:
+          limits:
+            memory: 64M
+            cpu: 100m
