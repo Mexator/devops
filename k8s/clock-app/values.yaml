@@ -4,6 +4,8 @@
 
 replicaCount: 1
 
+devops: DevOps is just a YAML editor
+
 image:
   repository: mexator/clock
   pullPolicy: IfNotPresent
