@@ -12,10 +12,10 @@ app = Flask(config.app_name)
 routes.init_routes(app)
 
 logging.basicConfig()
-logger_names = ['waitress', 'wsgi']
-loggers = [logging.getLogger(name) for name in logger_names]
+accessLogger = logging.getLogger('wsgi')
+accessLogger.addHandler(logging.FileHandler('access.log'))
+accessLogger.setLevel(logging.INFO)
 
 if os.environ['MODE'] == 'PROD':
-    for logger in loggers:
-        logger.setLevel(logging.INFO)
-    serve(TransLogger(app, loggers[1]), port=5000)
+    app = TransLogger(app, accessLogger, setup_console_handler=False)
+    serve(app, port=5000)
