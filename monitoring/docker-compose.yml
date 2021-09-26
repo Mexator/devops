@@ -13,6 +13,8 @@ services:
         max-size: "10m"
         tag:
           "{{.ImageName}}|{{.Name}}"
+    volumes:
+      - logs:/logs/ 
     networks:
       - monitoring.network
     deploy:
@@ -88,3 +90,6 @@ networks:
   monitoring.network:
     ipam:
       driver: default
+
+volumes:
+  logs:

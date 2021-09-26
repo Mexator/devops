@@ -9,11 +9,15 @@ from src.main import config
 from src.main import routes
 
 app = Flask(config.app_name)
-routes.init_routes(app)
+routes.init_routes(app, config.logpath)
 
 logging.basicConfig()
 accessLogger = logging.getLogger('wsgi')
-accessLogger.addHandler(logging.FileHandler('access.log'))
+
+os.makedirs(config.logpath, exist_ok=True)
+open(config.logpath + 'access.log', 'w+')
+
+accessLogger.addHandler(logging.FileHandler(config.logpath + 'access.log'))
 accessLogger.setLevel(logging.INFO)
 
 if os.environ['MODE'] == 'PROD':
