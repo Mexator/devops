@@ -1,10 +1,12 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "clock-app.fullname" . }}
   labels:
     {{- include "clock-app.labels" . | nindent 4 }}
 spec:
+  podManagementPolicy: Parallel
+  serviceName: {{ include "clock-app.fullname" . }}
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
@@ -13,17 +15,9 @@ spec:
       {{- include "clock-app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
         {{- include "clock-app.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       serviceAccountName: {{ include "clock-app.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
@@ -34,9 +28,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: devops-secret
-                  key: devops 
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
+                  key: devops
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
@@ -56,6 +48,8 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: {{ .Values.image.mountDir }}
+            - name: logs
+              mountPath: {{ .Values.image.logsDir }}
       volumes:
         - name: config-volume
           configMap:
@@ -72,3 +66,11 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+  volumeClaimTemplates:
+  - metadata:
+      name: logs
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

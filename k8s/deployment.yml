@@ -1,10 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: clock-deployment
   labels:
     app: clock
 spec:
+  serviceName: clock
   replicas: 3
   selector:
     matchLabels:
@@ -17,10 +18,22 @@ spec:
       containers:
       - image: mexator/clock
         name: clock
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
           - containerPort: 5000
+        volumeMounts:
+          - name: access-logs
+            mountPath: /logs/
         resources:
           limits:
             memory: 64M
             cpu: 100m
+  volumeClaimTemplates:
+    - metadata:
+        name: access-logs
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi
+
